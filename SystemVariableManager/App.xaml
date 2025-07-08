@@ -1,7 +1,7 @@
-﻿<Application x:Class="SystemVariableManager.App"
+﻿<Application x:Class="SystemVariableManagerSample.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SystemVariableManager"
+             xmlns:local="clr-namespace:SystemVariableManagerSample"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SystemVariableManager
+namespace SystemVariableManagerSample
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -9,7 +9,6 @@ namespace SystemVariableManager
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Managers.SystemVariableManager.Instance.Initialize();
             base.OnStartup(e);
         }
     }

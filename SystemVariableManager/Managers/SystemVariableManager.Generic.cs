@@ -1,26 +1,46 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Runtime.CompilerServices;
+using SystemVariableService.Configurations;
 
 using IWshRuntimeLibrary;
 
-namespace SystemVariableManager.Managers
+namespace SystemVariableManagerSample.Managers
 {
     using File = System.IO.File;
 
     public partial class SystemVariableManager
     {
-        [Settings(Setting.Generic, false)]
+        private const string UserCategory = "User";
+
+        [SystemVariable(GenericCategory, false)]
         public bool AutomaticRunWindows
         {
-            get => bool.TryParse(GetGenericSettingsValue(), out bool parsed) ? parsed : false;
+            get => bool.TryParse(GetGenericValue(), out bool parsed) && parsed;
             set
             {
                 var updated = UpdateAutomaticWindowsStartup(value);
-                SetGenericSettingsValue(updated);
+                SetGenericValue(updated);
             }
         }
 
+        [SystemVariable(UserCategory, "QuokkaServant")]
+        public string? Username
+        {
+            get => Decryption(GetValue(UserCategory));
+            set => SetValue(UserCategory, Encryption(value));
+        }
+
         // TODO : Add properties if necessary.
+
+        private string? GetGenericValue([CallerMemberName] string? propertyName = null)
+        {
+            return GetValue(GenericCategory, propertyName);
+        }
+
+        private void SetGenericValue(object? value, [CallerMemberName] string? propertyName = null)
+        {
+            SetValue(GenericCategory, value, propertyName);
+        }
 
         private bool UpdateAutomaticWindowsStartup(bool startup)
         {

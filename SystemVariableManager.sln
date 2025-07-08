@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemVariableManager", "SystemVariableManager\SystemVariableManager.csproj", "{B5331128-73B3-45CF-A2A6-E73145864603}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemVariableManagerSample", "SystemVariableManager\SystemVariableManagerSample.csproj", "{B5331128-73B3-45CF-A2A6-E73145864603}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemVariableService", "SystemVariableServiceBase\SystemVariableService.csproj", "{D0A35D7E-B2BB-41BC-BCF1-3DBEB4EF9B85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{B5331128-73B3-45CF-A2A6-E73145864603}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5331128-73B3-45CF-A2A6-E73145864603}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5331128-73B3-45CF-A2A6-E73145864603}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0A35D7E-B2BB-41BC-BCF1-3DBEB4EF9B85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0A35D7E-B2BB-41BC-BCF1-3DBEB4EF9B85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0A35D7E-B2BB-41BC-BCF1-3DBEB4EF9B85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0A35D7E-B2BB-41BC-BCF1-3DBEB4EF9B85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03368AEB-D4F5-46AD-ACBA-31E4FC764C7A}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,4 @@
-﻿namespace SystemVariableManager
+﻿namespace SystemVariableManagerSample
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

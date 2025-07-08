@@ -1,4 +1,4 @@
-﻿namespace SystemVariableManager
+﻿namespace SystemVariableManagerSample
 {
     using Managers;
 
@@ -10,6 +10,16 @@
             set
             {
                 SystemVariableManager.Instance.AutomaticRunWindows = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string? Username
+        {
+            get => SystemVariableManager.Instance.Username;
+            set
+            {
+                SystemVariableManager.Instance.Username = value;
                 OnPropertyChanged();
             }
         }
