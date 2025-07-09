@@ -14,9 +14,11 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         
         <TextBox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="{Binding Username, UpdateSourceTrigger=LostFocus}" />
         <CheckBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Automatically run the program at the start of Windows" IsChecked="{Binding AutomaticRunWindows}" />
+        <Button Grid.Row="2" Padding="6,4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Reset configurations" Command="{Binding ResetConfigurationsCommand}" />
     </Grid>
 </Window>

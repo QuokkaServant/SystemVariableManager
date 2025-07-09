@@ -12,11 +12,16 @@ namespace SystemVariableManagerSample.Managers
 
         public static SystemVariableManager Instance => instance.Value;
 
-        protected SystemVariableManager() : base() { }
+        private SystemVariableManager() : base() { }
 
         static SystemVariableManager()
         {
             if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
         }
     }
 }

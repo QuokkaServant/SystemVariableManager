@@ -26,23 +26,23 @@ namespace SystemVariableService.Configurations
 
         protected SystemVariableServiceBase()
         {
-            if (!File.Exists(SettingsPath))
+            lock (lockObject)
             {
-                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{nameof(SystemVariableService)}.{Filename}"))
-                {
-                    if (stream == null)
-                        throw new ApplicationException($"'{Filename}' resource does not exist.");
-
-                    using var fileStream = File.Create(SettingsPath);
-                    stream.Seek(0, SeekOrigin.Begin);
-                    stream.CopyTo(fileStream);
-                }
-
                 if (!File.Exists(SettingsPath))
-                    throw new FileNotFoundException($"'{SettingsPath}' file not found. Not created.");
+                    CreateDefaultFileResource(SettingsPath);
             }
             LoadConfiguration();
             Initialize();
+        }
+
+        private void CreateDefaultFileResource(string path)
+        {
+            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{nameof(SystemVariableService)}.{Filename}") ?? throw new ApplicationException($"'{Filename}' resource does not exist.");
+            using var fileStream = File.Create(path);
+            stream.Seek(0, SeekOrigin.Begin);
+            stream.CopyTo(fileStream);
+
+            if (!File.Exists(path)) throw new FileNotFoundException($"'{path}' file not found. Not created.");
         }
 
         private void Initialize()
@@ -63,6 +63,11 @@ namespace SystemVariableService.Configurations
         {
             var configurationBuilder = new ConfigurationBuilder().SetBasePath(Path.GetDirectoryName(SettingsPath)!).AddJsonFile(Path.GetFileName(SettingsPath), false);
             configuration = configurationBuilder.Build();
+        }
+
+        private string GetKeyname(string propertyName)
+        {
+            return GetType().GetProperty(propertyName)?.GetCustomAttribute<SystemVariableAttribute>()?.Key ?? propertyName;
         }
 
         protected string? GetValue(string category, [CallerMemberName] string? propertyName = null)
@@ -86,9 +91,17 @@ namespace SystemVariableService.Configurations
             }
         }
 
-        private string GetKeyname(string propertyName)
+        public virtual void Reset()
         {
-            return GetType().GetProperty(propertyName)?.GetCustomAttribute<SystemVariableAttribute>()?.Key ?? propertyName;
+            lock (lockObject)
+            {
+                if (File.Exists(SettingsPath))
+                    File.Delete(SettingsPath);
+
+                CreateDefaultFileResource(SettingsPath);
+            }
+            LoadConfiguration();
+            Initialize();
         }
 
         protected static string? Encryption(string? input, byte[]? optionalEntropy = null)

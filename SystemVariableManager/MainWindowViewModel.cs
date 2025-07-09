@@ -23,5 +23,19 @@
                 OnPropertyChanged();
             }
         }
+
+        public System.Windows.Input.ICommand ResetConfigurationsCommand { get; }
+
+        public MainWindowViewModel()
+        {
+            ResetConfigurationsCommand = new CommunityToolkit.Mvvm.Input.RelayCommand(ResetConfigurations);
+        }
+
+        private void ResetConfigurations()
+        {
+            SystemVariableManager.Instance.Reset();
+            OnPropertyChanged(nameof(AutomaticRunWindows));
+            OnPropertyChanged(nameof(Username));
+        }
     }
 }

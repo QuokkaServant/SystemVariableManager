@@ -23,7 +23,7 @@ namespace SystemVariableManagerSample.Managers
             }
         }
 
-        [SystemVariable(UserCategory, "QuokkaServant")]
+        [SystemVariable(UserCategory, "QuokkaServant", "유저")]
         public string? Username
         {
             get => Decryption(GetValue(UserCategory));
